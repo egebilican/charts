@@ -1,5 +1,5 @@
 import React from "react";
-import DemoChart from "./components/DemoChart";
+import DemoChart from "./containers/DemoChart";
 
 function App() {
   return (
