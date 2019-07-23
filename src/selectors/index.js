@@ -34,7 +34,6 @@ const MAX_ADDITION_MULTIPLIER = 1.1;
 export const maxDataSelector = createSelector(
   dataSelector,
   state => {
-    console.log("STATE", state);
     if (state.data && state.data.female && state.data.male) {
       const maxLevel = Math.max(...[...state.data.male, ...state.data.female]);
       return Math.ceil(maxLevel * MAX_ADDITION_MULTIPLIER);
