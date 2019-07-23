@@ -2,11 +2,11 @@ import React, { createRef, useEffect, useState } from "react";
 import Chart from "chart.js";
 import "chartjs-plugin-annotation";
 
-export const FancyChart = props => {
+export const FancyChart = ({ dataSet1, dataSet2, fbAverage, max }) => {
   const [showAnnotation, setShowAnnotation] = useState(false);
-  console.log("showAnnotation", showAnnotation);
 
   const ref = createRef();
+
   useEffect(() => {
     const customChart = new Chart(ref.current, {
       type: "line",
@@ -14,38 +14,30 @@ export const FancyChart = props => {
         datasets: [
           {
             label: "Male",
-            data: props.dataSet1,
+            data: dataSet1,
             backgroundColor: "rgba(100, 0, 0, 0.1)",
-            pointRadius: 2,
-            hoverBackgroundColor: "blue"
+            pointRadius: 0
           },
           {
             label: "Female",
-            data: props.dataSet2,
+            data: dataSet2,
             backgroundColor: "rgba(0, 50, 0, 0.1)",
-            pointRadius: 2
+            pointRadius: 0
           }
         ]
       },
 
       options: {
         legend: false,
-
         onHover: (event, item) => {
           if (item.length > 0 && !showAnnotation) {
-            console.log("to true");
-
             setShowAnnotation(true);
           } else if (item.length === 0 && showAnnotation) {
-            console.log("to false");
             setShowAnnotation(false);
           }
         },
-        tooltips: {
-          mode: "point"
-        },
         hover: {
-          mode: "nearest",
+          mode: "dataset",
           intersect: false
         },
         annotation: showAnnotation && {
@@ -54,15 +46,18 @@ export const FancyChart = props => {
               type: "line",
               mode: "vertical",
               scaleID: "x-axis-label",
-              value: props.linePos,
+              value: fbAverage,
               borderColor: "black",
               label: {
-                content: `Facebook Average: ${props.linePos}`,
+                content: `Facebook Average: ${fbAverage}`,
                 enabled: true,
                 position: "top"
               }
             }
           ]
+        },
+        animation: {
+          duration: 0
         },
         elements: {
           line: {
@@ -78,11 +73,11 @@ export const FancyChart = props => {
                 labelString: "Viewership"
               },
               ticks: {
-                suggestedMax: props.max,
+                suggestedMax: max,
                 callback: function(value) {
                   if (value === 0) {
                     return 0;
-                  } else if (value === props.max) {
+                  } else if (value === max) {
                     return `${value} %`;
                   }
                   return "";
@@ -101,10 +96,7 @@ export const FancyChart = props => {
             }
           ]
         },
-        layout: {
-          padding: 160,
-          backgroundColor: "grey"
-        }
+        layout: { padding: 150 }
       }
     });
   });

@@ -14,14 +14,14 @@ class DemoChart extends Component {
     this.props.fetchData();
   }
   render() {
-    console.log("PROPS", this.props);
+    const { male, female, max, average } = this.props;
     return (
       <div>
         <FancyChart
-          dataSet1={this.props.male}
-          dataSet2={this.props.female}
-          max={this.props.max}
-          linePos={this.props.average}
+          dataSet1={male}
+          dataSet2={female}
+          max={max}
+          fbAverage={average}
         />
       </div>
     );
