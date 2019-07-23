@@ -13,15 +13,15 @@ export const FancyChart = ({ dataSet1, dataSet2, fbAverage, max }) => {
       data: {
         datasets: [
           {
-            label: "Male",
-            data: dataSet1,
-            backgroundColor: "rgba(100, 0, 0, 0.1)",
+            label: "Female",
+            data: dataSet2,
+            backgroundColor: "rgba(117, 213, 188, 0.8)",
             pointRadius: 0
           },
           {
-            label: "Female",
-            data: dataSet2,
-            backgroundColor: "rgba(0, 50, 0, 0.1)",
+            label: "Male",
+            data: dataSet1,
+            backgroundColor: "rgba(130, 162, 210, 0.8)",
             pointRadius: 0
           }
         ]
